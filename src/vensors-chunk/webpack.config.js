@@ -7,96 +7,55 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
-const DLL_PATH = '../dll/dist';
-const ALPHA_MANIFEST = DLL_PATH + '/alpha-manifest.json';
-const BETA_MANIFEST = DLL_PATH + '/beta-manifest.json';
-const VENDORS_MANIFEST = DLL_PATH + '/vendors-manifest.json';
-const ASSET_MANIFEST = DLL_PATH + '/asset-manifest.json';
-const ALPHA_JS = 'alpha.js';
-const BETA_JS = 'beta.js';
-const VENDORS_JS = 'vendors.js';
-const DLL_TMP_PATH = 'dll';
-
 module.exports = {
   mode: 'development' && 'production',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   entry: {
-    beta: ['./index'],
+    main: ['./index'],
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'output-[hash].js',
+    filename: '[name]-[contenthash].js',
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new CopyPlugin([
-      {
-        from: `${DLL_PATH}/*.dll.*`,
-        to: `./${DLL_TMP_PATH}/`,
-      },
-    ]),
-    new webpack.DllReferencePlugin({
-      context: path.join(__dirname, '..', 'dll'),
-      manifest: require(ALPHA_MANIFEST), // eslint-disable-line
-    }),
-    new webpack.DllReferencePlugin({
-      scope: 'beta',
-      manifest: require(BETA_MANIFEST), // eslint-disable-line
-      extensions: ['.js', '.jsx'],
-    }),
-    new webpack.DllReferencePlugin({
-      // context: path.join(__dirname, '..', 'dll'),
-      // scope: 'vendors',
-      // name: './vendors.js',
-      // content: './node_modules/react/index.js',
-      manifest: require(VENDORS_MANIFEST), // eslint-disable-line
-      // sourceType: 'var',
-    }),
-    // new webpack.DllReferencePlugin({
-    //   context: path.join(__dirname, '..', 'dll'),
-    //   // scope: 'vendors',
-    //   name: 'react-dom',
-    //   manifest: require(VENDORS_MANIFEST), // eslint-disable-line
-    //   sourceType: 'var',
-    // }),
     new ManifestPlugin({
       fileName: 'asset-manifest.json',
     }),
-    new HtmlWebpackPlugin({
-      inject: true, // will inject the main bundle to index.html
-      template: './example.html',
-      templateParameters: (compilation, assets, assetTags, options) => {
-        let manifest = fs.readFileSync(`${DLL_PATH}/asset-manifest.json`);
-        manifest = JSON.parse(manifest.toString());
-
-        const dlls = [
-          // prettier-ignore
-          `dll/dist/${manifest[ALPHA_JS]}`,
-          `dll/dist/${manifest[BETA_JS]}`,
-          `dll/dist/${manifest[VENDORS_JS]}`,
-        ];
-        // fs.writeFileSync('../../tempLog.json', JSON.stringify(js));
-
-        return {
-          compilation,
-          webpackConfig: compilation.options,
-          htmlWebpackPlugin: {
-            tags: assetTags,
-            files: assets,
-            // files: {
-            //   ...assets,
-            //   // prettier-ignore
-            //   publicPath:'./dist',
-            //   js: js,
-            // },
-            options,
-          },
-          dlls,
-        };
-      },
-    }),
+    // new HtmlWebpackPlugin({
+    //   inject: true, // will inject the main bundle to index.html
+    //   template: './example.html',
+    //   templateParameters: (compilation, assets, assetTags, options) => {
+    //     // let manifest = fs.readFileSync(`${DLL_PATH}/asset-manifest.json`);
+    //     // manifest = JSON.parse(manifest.toString());
+    //     //
+    //     // const dlls = [
+    //     //   // prettier-ignore
+    //     //   `dll/dist/${manifest[ALPHA_JS]}`,
+    //     //   `dll/dist/${manifest[BETA_JS]}`,
+    //     //   `dll/dist/${manifest[VENDORS_JS]}`,
+    //     // ];
+    //     // fs.writeFileSync('../../tempLog.json', JSON.stringify(js));
+    //
+    //     return {
+    //       compilation,
+    //       webpackConfig: compilation.options,
+    //       htmlWebpackPlugin: {
+    //         tags: assetTags,
+    //         files: assets,
+    //         // files: {
+    //         //   ...assets,
+    //         //   // prettier-ignore
+    //         //   publicPath:'./dist',
+    //         //   js: js,
+    //         // },
+    //         options,
+    //       },
+    //     };
+    //   },
+    // }),
   ],
   externals: {
     // react: 'vendors react',
@@ -149,6 +108,23 @@ module.exports = {
         sourceMap: false,
       }),
     ],
+    splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 0,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules([\\/]lodash)[\\/]/,
+          name: 'vendors',
+          filename: 'static/[name]-[contenthash].js',
+        },
+        example: {
+          test: /([\\/]example)/,
+          name: 'example',
+          filename: 'module/[name]-[contenthash].js',
+        },
+      },
+    },
   },
   module: {
     rules: [

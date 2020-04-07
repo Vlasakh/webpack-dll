@@ -13,8 +13,7 @@ module.exports = {
     // alpha: ["./alpha", "./a"],
     // beta: ["./beta", "./b", "./c"]
     // vendors: ['react', 'react-dom', '@material-ui/core'],
-    // vendors: ['lodash', ],
-    vendors: ['lodash', 'react', 'react-dom'],
+    vendors: ['lodash/get','lodash/merge', ],
     alpha: ['./alpha'],
     beta: ['./beta', './c'],
   },

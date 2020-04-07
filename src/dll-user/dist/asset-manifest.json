@@ -1,6 +1,7 @@
 {
-  "beta.js": "output-5d78ef8c0db60d192310.js",
-  "dll/dist/MyDll.alpha-fcc48af37f202df15682.dll.js": "dll/dist/MyDll.alpha-fcc48af37f202df15682.dll.js",
-  "dll/dist/MyDll.beta-fcc48af37f202df15682.dll.js": "dll/dist/MyDll.beta-fcc48af37f202df15682.dll.js",
+  "beta.js": "output-7aefbae9f1049f35c1f1.js",
+  "dll/dist/MyDll.alpha-e0a49e4e69a344ab4759.dll.js": "dll/dist/MyDll.alpha-e0a49e4e69a344ab4759.dll.js",
+  "dll/dist/MyDll.beta-e0a49e4e69a344ab4759.dll.js": "dll/dist/MyDll.beta-e0a49e4e69a344ab4759.dll.js",
+  "dll/dist/MyDll.vendors-e0a49e4e69a344ab4759.dll.js": "dll/dist/MyDll.vendors-e0a49e4e69a344ab4759.dll.js",
   "index.html": "index.html"
 }

@@ -20,3 +20,7 @@
 npm-debug.log
 
 tempLog.json
+/src/dll/node_modules/
+/src/dll-user/node_modules/
+/src/single-modules/node_modules/
+/src/vensors-chunk/node_modules/
