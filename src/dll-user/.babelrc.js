@@ -5,6 +5,15 @@ module.exports = {
   plugins: [
     ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }],
     ['@babel/plugin-proposal-class-properties', { loose: true }],
+    [
+      'babel-plugin-import',
+      {
+        libraryName: 'lodash',
+        // Use "'libraryDirectory': ''," if your bundler does not support ES modules
+        libraryDirectory: './',
+        camel2DashComponentName: false,
+      },
+    ],
   ],
   exclude: [
     '/node_modules\\/*jss*/',

@@ -118,6 +118,11 @@ module.exports = {
           name: 'vendors',
           filename: 'static/[name]-[contenthash].js',
         },
+        'cloud-archive': {
+          test: /[\\/]node_modules([\\/]exa-core-ui)[\\/]/,
+          name: 'vendors',
+          filename: 'static/[name]-[contenthash].js',
+        },
         example: {
           test: /([\\/]example)/,
           name: 'example',

@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // import _ from 'lodash';
-import get from 'lodash/get';
-import merge from 'lodash/merge';
+import { get } from 'lodash';
+import { merge } from 'lodash';
+// import get from 'lodash/get';
+// import merge from 'lodash/merge';
 
 import App from './example';
 
