@@ -10,11 +10,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   entry: {
-    // alpha: ["./alpha", "./a"],
-    // beta: ["./beta", "./b", "./c"]
-    // vendors: ['react', 'react-dom', '@material-ui/core'],
-    // vendors: ['lodash', ],
-    vendors: ['lodash/get', 'lodash/mapKeys', 'react', 'react-dom'],
+    vendors: ['lodash/get' /*'lodash/mapKeys', 'react', 'react-dom'*/],
     alpha: ['./alpha'],
     beta: ['./beta', './c'],
   },
