@@ -12,10 +12,9 @@ const config = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'mfe_1',
-      filename: 'remoteEntry.js',
-      exposes: {
-        './MFE1Index': './src/index',
+      name: 'container', // not used
+      remotes: {
+        appMFE1: 'mfe_1@http://localhost:8001/remoteEntry.js',
       },
     }),
     new HtmlWebpackPlugin({
@@ -47,7 +46,7 @@ const config = {
     ],
   },
   devServer: {
-    port: 8001,
+    port: 8011,
   },
 };
 
