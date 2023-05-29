@@ -4,6 +4,7 @@ import './App.css';
 import Button from './Button';
 
 function App() {
+  console.log('❗mFE render');
   return (
     <div className="App">
       MFE 1 {faker.internet.userName()}

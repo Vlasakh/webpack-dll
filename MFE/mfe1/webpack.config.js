@@ -15,8 +15,9 @@ const config = {
       name: 'mfe_1',
       filename: 'remoteEntry.js',
       exposes: {
-        './MFE1Index': './src/index',
+        './MFE1Index': './src/bootstrap',
       },
+      shared: ['@faker-js/faker', 'react', 'react-dom', 'css-loader'],
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',

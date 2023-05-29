@@ -16,6 +16,7 @@ const config = {
       remotes: {
         appMFE1: 'mfe_1@http://localhost:8001/remoteEntry.js',
       },
+      shared: ['@faker-js/faker', 'react', 'react-dom', 'css-loader'],
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',

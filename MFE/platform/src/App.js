@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { faker } from '@faker-js/faker';
-import 'appMFE1/MFE1Index';
+import { mount } from 'appMFE1/MFE1Index';
 import './App.css';
 import logo from './logo.svg';
 
 function App() {
+  useEffect(() => {
+    mount(document.getElementById('MFEroot'));
+  }, []);
+
   return (
     <div className="App">
       <header>
