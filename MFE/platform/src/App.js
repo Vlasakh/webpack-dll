@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { faker } from '@faker-js/faker';
 import { mount } from 'appMFE1/MFE1Index';
 import './App.css';
 import logo from './logo.svg';
 
 function App() {
+  const mfeRef = useRef(null);
   useEffect(() => {
-    mount(document.getElementById('MFEroot'));
+    mount(mfeRef.current);
   }, []);
 
   return (
@@ -20,6 +21,8 @@ function App() {
           Learn React {faker.internet.userName()}
         </a>
       </header>
+
+      <div ref={mfeRef} />
     </div>
   );
 }
