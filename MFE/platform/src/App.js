@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useId, useRef } from 'react';
 import { faker } from '@faker-js/faker';
 import { mount } from 'appMFE1/MFE1Index';
 import './App.css';
@@ -9,6 +9,8 @@ function App() {
   useEffect(() => {
     mount(mfeRef.current);
   }, []);
+
+  console.log('❗useId', useId);
 
   return (
     <div className="App">

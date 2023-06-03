@@ -17,7 +17,7 @@ const config = {
       exposes: {
         './MFE1Index': './src/bootstrap',
       },
-      shared: ['@faker-js/faker', 'react', 'react-dom', 'css-loader'],
+      shared: { '@faker-js/faker': {}, react: {}, 'react-dom': {} },
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
